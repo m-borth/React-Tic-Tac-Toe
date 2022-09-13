@@ -20,24 +20,22 @@ class Board extends React.Component {
     );
   }
 
+  renderRow(i) {
+    return(
+      <div className="board-row">
+        {this.renderSquare(i)}
+        {this.renderSquare(i+1)}
+        {this.renderSquare(i+2)}
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+        {this.renderRow(0)}
+        {this.renderRow(3)}
+        {this.renderRow(6)}
       </div>
     );
   }
@@ -102,6 +100,8 @@ class Game extends React.Component {
     let status;
     if (winner) {
       status = "Winner: " + winner;
+    } else if (history.length === 10) {
+      status = "The Game has ended in a Draw! Next player: " + (this.state.xIsNext ? "X" : "O");
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
